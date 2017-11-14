@@ -1,47 +1,63 @@
 import React, { PureComponent } from 'react'
+import { fetchBatches } from '../actions/batches'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Paper from 'material-ui/Paper'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
-import {FETCHED_BATCHES, FETCHED_ONE_BATCH} from '../actions/batches/fetch'
-import fetchBatches from '../actions/batches/fetch'
-export class Batches extends PureComponent{
+import {GridList, GridTile} from 'material-ui/GridList';
+import Subheader from 'material-ui/Subheader';
+import SignIn from './SignIn'
+import PropTypes from 'prop-types'
+import BatchForm from './BatchForm'
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 800,
+    height: 450,
+    overflowY: 'auto',
+  },
+};
+
+class Batches extends PureComponent {
+  static propTypes = {
+  signedIn: PropTypes.bool,
+}
   componentWillMount() {
     this.props.fetchBatches()
   }
 
-  goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
-
-
-  renderBatches = (batch, index) => {
-    const date = `${batch.startDate.substr(0,10)}  ${batch.endDate.substr(0,10)}`
-    const batchno = `No. #${batch.batchNumber}`
-    return (
-      <MenuItem
-        key={index}
-        onClick={this.goToBatch(batch._id)}
-        primaryText= {batchno}
-        secondaryText={date}
-      />
-    )
-  }
+ goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
 
   render() {
-    return (
-      <div className="BatchList">
-        <h1>There are {this.props.batches.length} Classes</h1>
-        <Paper className="paper">
-          <Menu>
-            {this.props.batches.map(this.renderBatches)}
-          </Menu>
-        </Paper>
-      </div>
+    if (!this.props.signedIn) return <SignIn />
+
+    return(
+      <div style={styles.root}>
+        <GridList
+         cellHeight={180}
+         style={styles.gridList}
+        >
+     <Subheader>All Classes</Subheader>
+     {this.props.batches.map((batch) => (
+       <GridTile
+         key={batch._id}
+         title= {"#" + batch.batchNumber}
+         subtitle={<span>{batch.startDate.substring(0,10) + " ~ " + batch.endDate.substring(0,10)}</span>}
+         onClick={this.goToBatch(batch._id)}
+        >
+       </GridTile>
+     ))}
+   </GridList>
+   <BatchForm />
+ </div>
     )
   }
 }
 
-const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
-const mapDispatchToProps = { fetchBatches }
+const mapStateToProps = ({ batches, currentUser }) => ({ batches, signedIn: !!currentUser && !!currentUser._id, })
+const mapDispatchToProps = { fetchBatches, push }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Batches)
