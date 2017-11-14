@@ -5,14 +5,14 @@ import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import {FETCHED_BATCHES, FETCHED_ONE_BATCH} from '../actions/batches/fetch'
-import {fetchBatches} from '../actions/batches/fetch'
+import fetchBatches from '../actions/batches/fetch'
 export class Batches extends PureComponent{
 
   componentWillMount() {
     this.props.fetchBatches()
   }
 
-goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
+goToBatch = batchId => event => this.props(`/batches/${batchId}`)
 
   renderBatches = (batch, index) => {
     return (
@@ -20,6 +20,7 @@ goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
         key={index}
         onClick={this.goToBatch(batch._id)}
         />
+
     )
   }
 
@@ -38,5 +39,5 @@ goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
 }
 
 const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
-
-export default connect(mapStateToProps, { fetchBatches, push })(Batches)
+const mapDispatchToProps = { fetchBatches }
+export default connect(mapStateToProps, mapDispatchToProps)(Batches)
