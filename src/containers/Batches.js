@@ -12,22 +12,26 @@ export class Batches extends PureComponent{
     this.props.fetchBatches()
   }
 
-goToBatch = batchId => event => this.props(`/batches/${batchId}`)
+  goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
+
 
   renderBatches = (batch, index) => {
+    const date = `${batch.startDate.substr(0,10)}  ${batch.endDate.substr(0,10)}`
+    const batchno = `No. #${batch.batchNumber}`
     return (
       <MenuItem
         key={index}
         onClick={this.goToBatch(batch._id)}
-        />
-
+        primaryText= {batchno}
+        secondaryText={date}
+      />
     )
   }
 
   render() {
     return (
       <div className="BatchList">
-        <h1>Classes</h1>
+        <h1>There are {this.props.batches.length} Classes</h1>
         <Paper className="paper">
           <Menu>
             {this.props.batches.map(this.renderBatches)}
