@@ -17,11 +17,10 @@ const styles = {
   gridList: {
     width: 800,
     height: 450,
-    overflowY: 'auto',
   },
 };
 
-class Batches extends PureComponent {
+class BatchesContainer extends PureComponent {
   static propTypes = {
   signedIn: PropTypes.bool,
 }
@@ -37,15 +36,15 @@ class Batches extends PureComponent {
     return(
       <div style={styles.root}>
         <GridList
-         cellHeight={180}
+         cellHeight={100}
          style={styles.gridList}
         >
      <Subheader>All Classes</Subheader>
      {this.props.batches.map((batch) => (
        <GridTile
          key={batch._id}
-         title= {"#" + batch.batchNumber}
-         subtitle={<span>{batch.startDate.substring(0,10) + " ~ " + batch.endDate.substring(0,10)}</span>}
+         title= {"Batch  #" + batch.batchNumber}
+         subtitle={<span>{batch.startDate.substr(0,10) + " \\ " + batch.endDate.substr(0,10)}</span>}
          onClick={this.goToBatch(batch._id)}
         >
        </GridTile>
@@ -60,4 +59,4 @@ class Batches extends PureComponent {
 const mapStateToProps = ({ batches, currentUser }) => ({ batches, signedIn: !!currentUser && !!currentUser._id, })
 const mapDispatchToProps = { fetchBatches, push }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Batches)
+export default connect(mapStateToProps, mapDispatchToProps)(BatchesContainer)
