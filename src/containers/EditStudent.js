@@ -11,13 +11,13 @@ import { push } from 'react-router-redux'
 import Drawer from 'material-ui/Drawer';
 
 
-  const dialogStyle = {
-    width: '300px',
-    margin: '30px',
+  const dialogS = {
+    width: '275px',
+    margin: '25px',
     padding: '2rem',
   }
 
-  const buttonStyle = {
+  const buttonS = {
     float: 'right',
     marginLeft: '2rem',
   }
@@ -33,6 +33,7 @@ class EditStudent extends PureComponent {
   componentWillMount() {
     const { student, fetchStudent, updateStudent } = this.props
     const { studentId } = this.props.match.params
+    debugger
 
     if (!student) { fetchStudent(studentId) }
 
@@ -46,19 +47,19 @@ class EditStudent extends PureComponent {
         const evaluation = {
          color: this.state.value,
          date: this.refs.date.getValue(),
-         remark: this.refs.remark.getValue()
+         note: this.refs.note.getValue()
        }
         const updatedStudent = {
           name: this.refs.name.getValue(),
           photo: this.refs.photo.getValue(),
           evaluation: evaluation
       }
-        console.log(updatedStudent)
+        console.log("woohooo")
         this.props.updateStudent(updatedStudent, student._id)
         this.props.push(`/students/${student._id}`)
       }
 
-      handleChange = (value) => {
+      handler = (value) => {
         this.setState({value: value})
         }
 
@@ -68,7 +69,7 @@ class EditStudent extends PureComponent {
       return (
         <div>
           <Drawer width={600} openSecondary={true} open={this.state.open}>
-          <Paper style={ dialogStyle }>
+          <Paper style={ dialogS }>
           <Title content="Edit" level={2} />
 
           <form onSubmit={this.submitForm.bind(this)} ref="form">
@@ -78,13 +79,13 @@ class EditStudent extends PureComponent {
             </div>
             <div className="input">
               <h4>Photo: </h4>
-              <TextField ref="photo" type="text" placeholder='url' defaultValue={student.photo} />
+              <TextField ref="photo" type="text" placeholder='url' onClick={this.evalStudent(student._id)}defaultValue={student.photo} />
             </div>
             <div className="input">
               <div className="colors" >
-                <div className="green1" primaryText="Green" onClick={this.handleChange("green")}></div>
-                <div className="yellow1" value={"yellow"} primaryText="Yellow" onClick={this.handleChange("yellow")}></div>
-                <div className="red1" value={"red"} primaryText="Red" onClick={this.handleChange("red")}></div>
+                <div className="green1" primaryText="Green" onClick={this.handler("green")}></div>
+                <div className="yellow1" value={"yellow"} primaryText="Yellow" onClick={this.handler("yellow")}></div>
+                <div className="red1" value={"red"} primaryText="Red" onClick={this.handler("red")}></div>
               </div>
             </div>
             <div className="input">
@@ -93,13 +94,13 @@ class EditStudent extends PureComponent {
            </div>
           <div className="input">
             <h4>Remarks: </h4>
-            <TextField ref="remark" type="text" placeholder='Remarks' defaultValue={student.evaluations[student.evaluations.length-1].remark}  multiLine={true}
+            <TextField ref="note" type="text" placeholder='Remarks' defaultValue={student.evaluations[student.evaluations.length-1].note}  multiLine={true}
               rows={2}
               rowsMax={4} />
           </div>
           </form>
         <RaisedButton
-          style={ buttonStyle }
+          style={ buttonS }
           onClick={ this.submitForm.bind(this) }
           label="Change"
           primary={true} />

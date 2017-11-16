@@ -4,6 +4,7 @@ import Batch from './Batch'
 import Batches from './Batches'
 import StudentEval from './StudentEval'
 import EditStudent from './EditStudent'
+import EvalForm from './EvalForm'
 
 export {
   SignIn,
@@ -11,4 +12,6 @@ export {
   Batches,
   Batch,
   StudentEval,
+  EditStudent,
+  EvalForm,
 }

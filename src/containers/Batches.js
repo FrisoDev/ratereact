@@ -20,14 +20,16 @@ const styles = {
   },
 };
 
-class BatchesContainer extends PureComponent {
+class Batches extends PureComponent {
   static propTypes = {
   signedIn: PropTypes.bool,
 }
   componentWillMount() {
     this.props.fetchBatches()
   }
-
+  handleChange = (event, index, value) => {
+    this.setState({value})
+    }
  goToBatch = batchId => event => this.props.push(`/batches/${batchId}`)
 
   render() {
@@ -59,4 +61,4 @@ class BatchesContainer extends PureComponent {
 const mapStateToProps = ({ batches, currentUser }) => ({ batches, signedIn: !!currentUser && !!currentUser._id, })
 const mapDispatchToProps = { fetchBatches, push }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BatchesContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Batches)

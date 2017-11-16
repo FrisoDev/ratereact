@@ -1,103 +1,63 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { evalStudent } from '../actions/students'
+import { createStudent } from '../actions/students'
 import PropTypes from 'prop-types'
 import Title from '../components/UI/Title'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import { push } from 'react-router-redux'
 
-const dialogStyle = {
-  width: '400px',
-  margin: '30px',
-  padding: '2rem',
+const dialogS = {
+  width: '300px',
+  margin: '50px',
+  padding: '3rem',
 }
 
-const button1 = {
+const buttonS = {
   float: 'left',
-}
-const buttonStyle = {
-  float: 'right',
+  marginLeft: '2rem',
 }
 
-class RateForm extends PureComponent {
+class StudentForm extends PureComponent {
   static propTypes = {
-    evalStudent: PropTypes.func.isRequired,
-    studentId: PropTypes.string,
-    color: PropTypes.string
+    createStudent: PropTypes.func.isRequired,
+    batchId: PropTypes.string
   }
 
   state = {}
 
   submitForm(event) {
     event.preventDefault()
-      const { studentId, batchId } = this.props
-      const evaluation = {
-        color: this.state.value,
-        date: this.refs.date.getValue(),
-        note: this.refs.note.getValue()
+      const { batchId } = this.props
+      const student = {
+        name: this.refs.name.getValue(),
+        photo: this.refs.photo.getValue(),
+        batchId: batchId,
+        evaluations: [{}],
       }
-      this.props.evalStudent(evaluation, studentId, batchId)
-      this.props.push(`/batches/${batchId}`)
-    }
-
-    submitNext(event) {
-      event.preventDefault()
-        const { studentId } = this.props
-         const evaluation = {
-          color: this.state.value,
-          date: this.refs.date.getValue(),
-          note: this.refs.note.getValue()
-        }
-        console.log(this.state.value)
-        this.props.evalStudent(evaluation, studentId)
-        this.props.push(`/students/${studentId}`)
-      }
-
-
-
-  handleChange = (event, index, value) => {
-    this.setState({value})
+      this.props.createStudent(student, batchId)
+      this.refs.form.reset()
     }
 
   render() {
     return (
-      <Paper style={ dialogStyle }>
-        <Title content="Rate Student" level={2} />
+      <Paper style={ dialogS }>
+        <Title content="Add New Student" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">
-        <div className="input">
-          <DropDownMenu ref="color" value={this.state.value} onChange={this.handleChange}>
-               <MenuItem value={"green"} primaryText="Green" />
-               <MenuItem value={"yellow"} primaryText="Yellow" />
-               <MenuItem value={"red"} primaryText="Red" />
-         </DropDownMenu>
-        </div>
-
           <div className="input">
-            <h4>Date: </h4>
-            <TextField ref="date" type="date" placeholder='Date' defaultValue={new Date().toISOString().substr(0, 10)} />
+            <h4>Full name: </h4>
+            <TextField ref="name" type="text" placeholder="Student Name" />
+          </div>
+          <div className="input">
+            <h4>Photo: </h4>
+            <TextField ref="photo" type="text" placeholder='link' />
          </div>
-        <div className="input">
-          <h4>Remarks: </h4>
-          <TextField ref="note" type="text" placeholder='Remarks'  multiLine={true}
-            rows={2}
-            rowsMax={4} />
-        </div>
         </form>
         <RaisedButton
-          style={ button1 }
-          onClick={ this.submitNext.bind(this) }
-          label="Save and next"
-          primary={true}/>
-        <RaisedButton
-          style={ buttonStyle }
+          style={ buttonS }
           onClick={ this.submitForm.bind(this) }
-          label="Save"
+          label="Add"
           primary={true} />
       </Paper>
     )
@@ -106,4 +66,4 @@ class RateForm extends PureComponent {
 
 const mapStateToProps = ({ student }) => ({ student })
 
-export default connect(mapStateToProps, { evalStudent, push })(RateForm)
+export default connect(mapStateToProps, { createStudent })(StudentForm)

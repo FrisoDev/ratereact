@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux'
 
 const containerStyle = {
-  width: '470px',
+  width: '700px',
   margin: '20px',
   padding: '2rem',
 }
@@ -19,11 +19,13 @@ class StudentEval extends PureComponent {
     const { student, fetchStudent } = this.props
     const { studentId } = this.props.match.params
 
+
     if (!student) { fetchStudent(studentId) }
 
   }
 
   editStudent = studentId => event => this.props.push(`/students/${studentId}/edit`)
+  evalStudent = studentId => event => this.props.push(`/students/${studentId}/eval`)
 
   render() {
     const { student } = this.props
@@ -41,6 +43,7 @@ class StudentEval extends PureComponent {
           <img src={student.photo} alt="student" />
             </CardMedia>
             <CardActions>
+              <FlatButton label="Evaluate" onClick={this.evalStudent(student._id)} />
               <FlatButton label="Edit" onClick={this.editStudent(student._id)} />
               <FlatButton label="Delete" />
             </CardActions>
@@ -61,4 +64,4 @@ const mapStateToProps = ({ students }, { match }) => {
   }
 }
 
-  export default connect(mapStateToProps, { fetchStudent, push })(StudentEval)
+export default connect(mapStateToProps, { fetchStudent, push })(StudentEval)

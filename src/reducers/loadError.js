@@ -1,4 +1,4 @@
-// src/reducers/loadError.js
+
 import { LOAD_ERROR, LOAD_SUCCESS, CLEAR_LOAD_ERROR } from '../actions/loading'
 
 export default (state = null, { type, payload } = {}) => {

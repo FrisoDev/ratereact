@@ -7,6 +7,8 @@ import Subheader from 'material-ui/Subheader';
 import StudentForm from './StudentForm'
 import { push } from 'react-router-redux'
 import Title from '../components/UI/Title'
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   root: {
@@ -25,7 +27,7 @@ const studentShape = PropTypes.shape({
   evaluations: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
-  batchNo: PropTypes.string.isRequired
+  batchId: PropTypes.string.isRequired
 })
 
 class Batch extends PureComponent {
@@ -45,7 +47,9 @@ class Batch extends PureComponent {
    this.props.fetchOneBatch(batchId)
 
   }
-
+  handleChange = (event, index, value) => {
+    this.setState({value})
+    }
    goToStudent = studentId => event => this.props.push(`/students/${studentId}`)
 
   render() {
@@ -67,10 +71,11 @@ class Batch extends PureComponent {
               title={student.name}
               onClick={this.goToStudent(student._id)}
               actionIcon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-               <circle fill={student.evaluations[student.evaluations.length-1].color} cx="12" cy="12" r="8"/></svg>}
+              </svg>}
             >
-              <img src={student.photo} alt="student"  onClick={this.goToStudent(student._id)}/>
+              <img src={student.photo} alt=""  onClick={this.goToStudent(student._id)}/>
         </GridTile>
+
     ))}
   </GridList>
 

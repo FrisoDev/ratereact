@@ -12,6 +12,8 @@ const api = new API()
 
 export default (student, studentId) => {
   return dispatch => {
+    console.log("im alive")
+    debugger
     dispatch({ type: APP_LOADING })
 
     api.put(`/students/${studentId}`, student )

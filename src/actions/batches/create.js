@@ -5,6 +5,7 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
+
 export const CREATE_BATCH = 'CREATE_BATCH'
 
 const api = new API()
