@@ -38,8 +38,6 @@ class Batch extends PureComponent {
       students: PropTypes.arrayOf(studentShape),
       startDate: PropTypes.string.isRequired,
       endDate: PropTypes.string.isRequired,
-      questions: PropTypes.array,
-      questionsDate: PropTypes.string,
       })
   }
 
@@ -86,7 +84,7 @@ class Batch extends PureComponent {
   <div>
     <StudentForm batchId= { batch._id}/>
     <RaisedButton
-      label="Ask Question"
+      label="RandomStudent"
       className="selectStudent"
       primary={true}
       onClick={ this.selectStudent.bind(this)}
