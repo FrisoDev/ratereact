@@ -43,7 +43,7 @@ class Batches extends PureComponent {
     return(
       <div style={styles.root}>
         <GridList
-         cellHeight={100}
+         cellHeight={150}
          style={styles.gridList}
         >
      {this.props.batches.map((batch) => (
@@ -52,10 +52,10 @@ class Batches extends PureComponent {
          key={batch._id}
          title= {"Batch " + batch.batchNumber}
          titleStyle={styles.titleStyle}
-         subtitle={<span>{batch.startDate.substr(0,10) + " ~ " + batch.endDate.substr(0,10)}</span>}
+         subtitle={<span>{batch.startDate.substr(0,10) + " / " + batch.endDate.substr(0,10)}</span>}
          subtitleStyle={styles.subtitleStyle}
          onClick={this.goToBatch(batch._id)}
-         titleBackground="rgba(179,229,252,0.5)"
+         titleBackground="rgba(45, 46, 48,0.1)"
         >
        </GridTile>
      ))}

@@ -15,8 +15,8 @@ const dialogStyle = {
 }
 
 const buttonStyle = {
-  float: 'right',
-  marginLeft: '2rem',
+  float: 'left',
+  marginLeft: '3rem',
 }
 
 export class SignIn extends PureComponent {

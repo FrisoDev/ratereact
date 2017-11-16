@@ -1,5 +1,5 @@
 div.green1 {
-  height: 40px;
+  height: 58px;
   width: 40px;
   border: 1 solid black;
   background-color: green;
@@ -7,15 +7,15 @@ div.green1 {
 }
 
 div.yellow1 {
-  height: 40px;
+  height: 58px;
   width: 40px;
-  border: 1 solid black;
+  border: 2 solid black;
   background-color: yellow;
   margin-right: 30px;
 }
 
 div.red1 {
-  height: 40px;
+  height: 58px;
   width: 40px;
   border: 1 solid black;
   background-color: red;
@@ -24,17 +24,16 @@ div.red1 {
 
 div.colors {
   display: flex;
-
 }
 
 .yellowPerc {
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .greenPerc {
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .redPerc {
-  margin-right: 20px;
+  margin-right: 40px;
 }
