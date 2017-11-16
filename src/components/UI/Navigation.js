@@ -22,10 +22,6 @@ class Navigation extends PureComponent {
     this.props.signOut()
   }
 
-  signUp = () => {
-    this.props.push('/sign-up')
-  }
-
   goHome = () => {
     this.props.push('/')
   }

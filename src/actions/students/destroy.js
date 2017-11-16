@@ -5,24 +5,22 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
+import { push } from 'react-router-redux'
 
-export const CREATE_BATCH = 'CREATE_BATCH'
+export const DELETE_STUDENT = 'DELETE_STUDENT'
 
 const api = new API()
 
-export default (batch) => {
+export default (student) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-  api.post('/batches', batch)
+  api.delete(`/students/${student._id}`)
     .then((result) => {
       dispatch({ type: APP_DONE_LOADING })
       dispatch({ type: LOAD_SUCCESS })
+      dispatch(push(`/batches/${student.batchId}`))
 
-      dispatch({
-        type: CREATE_BATCH,
-        payload: result.body
-      })
     })
 
     .catch((error) => {

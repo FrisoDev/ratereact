@@ -1,12 +1,14 @@
-import API from '../../api/client'
 import {
   APP_LOADING,
   APP_DONE_LOADING,
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
+import API from '../../api/client'
+import { push } from 'react-router-redux'
+import { fetchOneBatch } from '../batches/fetch'
 
-export const CREATE_BATCH = 'CREATE_BATCH'
+export const SELECT_STUDENT = 'SELECT_STUDENT'
 
 const api = new API()
 
@@ -14,17 +16,13 @@ export default (batch) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-  api.post('/batches', batch)
+api.put(`/batches/${batch._id}`, batch)
     .then((result) => {
       dispatch({ type: APP_DONE_LOADING })
       dispatch({ type: LOAD_SUCCESS })
-
-      dispatch({
-        type: CREATE_BATCH,
-        payload: result.body
-      })
-    })
-
+      dispatch (fetchOneBatch(batch._id))
+      dispatch(push(`/students/${result.body._id}`))
+  })
     .catch((error) => {
       dispatch({ type: APP_DONE_LOADING })
       dispatch({
@@ -32,5 +30,6 @@ export default (batch) => {
         payload: error.message
       })
     })
+
   }
 }
