@@ -7,15 +7,15 @@ import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const dialogStyle = {
-  width: '300px',
+const dS = {
+  width: '350px',
   margin: '30px',
-  padding: '2rem',
+  padding: '3rem',
 }
 
 const buttonStyle = {
   float: 'right',
-  marginLeft: '2rem',
+  marginLeft: '5rem',
 }
 
 class BatchForm extends PureComponent {
@@ -38,7 +38,7 @@ class BatchForm extends PureComponent {
 
   render() {
     return (
-      <Paper style={ dialogStyle }>
+      <Paper style={ dS }>
         <Title content="Add New Batch" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">

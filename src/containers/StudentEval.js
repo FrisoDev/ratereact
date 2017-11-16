@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import { fetchOneStudent, deleteStudent } from '../actions/students'
 import EvalForm from './EvalForm'
 import {Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux'
+import './StudentEval.css'
 
 const containerStyle = {
   width: '470px',
@@ -45,11 +48,11 @@ class EvalStudent extends PureComponent {
         </div>
           <img className="studentImage" src={student.photo} alt="student" />
             </CardMedia>
-            <CardActions>
-              <FlatButton label="Edit" onClick={this.editStudent(student._id)} />
-              <FlatButton label="Delete" onClick={this.deleteStudent}/>
-              <FlatButton label="Back" onClick={() => this.props.push(`/batches/${student.batchId}`)}/>
-            </CardActions>
+            <Menu>
+              <MenuItem primaryText="Edit" onClick={this.editStudent(student._id)} />
+              <MenuItem primaryText="Delete" onClick={this.deleteStudent}/>
+              <MenuItem primaryText="Back" onClick={() => this.props.push(`/batches/${student.batchId}`)}/>
+            </Menu>
         </Card>
         <div>
           <EvalForm studentId={student._id} batchId={student.batchId}/>

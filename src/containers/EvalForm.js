@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-
 import { connect } from 'react-redux'
 import { evalStudent } from '../actions/students'
 import PropTypes from 'prop-types'
@@ -46,42 +45,43 @@ class EvalForm extends PureComponent {
 
     submitNext(event) {
       event.preventDefault()
-        const { studentId, batchId } = this.props
-         const evaluation = {
-          color: this.state.value,
-          date: this.refs.date.getValue(),
-          note: this.refs.note.getValue()
+      const { studentId, batchId } = this.props
+      const evaluation = {
+        color: this.state.value,
+        date: this.refs.date.getValue(),
+        note: this.refs.note.getValue()
         }
-        this.props.evalStudent(evaluation, studentId, batchId)
-        this.props.push(`/students/${this.props.students[(this.props.students.findIndex(s=>s._id === studentId)+1)%this.props.students.length]._id}`)
 
+      this.props.evalStudent(evaluation, studentId, batchId)
+      this.props.push(`/students/${this.props.students[(this.props.students.findIndex(
+        s=>s._id === studentId)+1)%this.props.students.length]._id}`)
       }
 
-  handleChange = (value) => {
-    this.setState({value})
-    }
+  handleChange = (value) => { this.setState({value}) }
 
   render() {
     return (
       <Paper style={ dialogStyle }>
-        <Title content="Evaluate Student" level={2} />
+        <Title content="Rate Student" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">
         <div className="input">
           <div className="colors" >
-            <div className="green" onClick={()=>this.handleChange("green")}></div>
-            <div className="yellow" onClick={()=>this.handleChange("yellow")}></div>
-            <div className="red" onClick={()=>this.handleChange("red")}></div>
+            <div className="green1" onClick={()=>this.handleChange("green")}></div>
+            <div className="yellow1" onClick={()=>this.handleChange("yellow")}></div>
+            <div className="red1" onClick={()=>this.handleChange("red")}></div>
           </div>
         </div>
-         <h4>Eval: {this.state.value}</h4>
+         <h4>Rate: {this.state.value}</h4>
           <div className="input">
             <h4>Date: </h4>
-            <TextField ref="date" type="date" placeholder='Date' defaultValue={new Date().toISOString().substr(0, 10)} />
+            <TextField ref="date" type="date" placeholder='Date'
+              defaultValue={new Date().toISOString().substr(0, 10)} />
          </div>
         <div className="input">
           <h4>Remarks: </h4>
-          <TextField ref="note" type="text" placeholder='Remarks'  multiLine={true}
+          <TextField ref="note" type="text" placeholder='Remarks'
+            multiLine={true}
             rows={2}
             rowsMax={4} />
         </div>
