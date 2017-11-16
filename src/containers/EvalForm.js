@@ -64,17 +64,17 @@ class EvalForm extends PureComponent {
   render() {
     return (
       <Paper style={ dialogStyle }>
-        <Title content="Rate Student" level={2} />
+        <Title content="Evaluate Student" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">
         <div className="input">
           <div className="colors" >
-            <div className="green1" onClick={()=>this.handleChange("green")}></div>
-            <div className="yellow1" onClick={()=>this.handleChange("yellow")}></div>
-            <div className="red1" onClick={()=>this.handleChange("red")}></div>
+            <div className="green" onClick={()=>this.handleChange("green")}></div>
+            <div className="yellow" onClick={()=>this.handleChange("yellow")}></div>
+            <div className="red" onClick={()=>this.handleChange("red")}></div>
           </div>
         </div>
-         <h4>Rate: {this.state.value}</h4>
+         <h4>Eval: {this.state.value}</h4>
           <div className="input">
             <h4>Date: </h4>
             <TextField ref="date" type="date" placeholder='Date' defaultValue={new Date().toISOString().substr(0, 10)} />
