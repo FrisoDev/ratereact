@@ -1,31 +1,34 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchStudent } from '../actions/students'
-import StudentForm from './StudentForm'
-import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { fetchOneStudent, deleteStudent } from '../actions/students'
+import EvalForm from './EvalForm'
+import {Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { push } from 'react-router-redux'
 
 const containerStyle = {
-  width: '700px',
+  width: '470px',
+  height: '550px',
   margin: '20px',
   padding: '2rem',
 }
 
-class StudentEval extends PureComponent {
+class EvalStudent extends PureComponent {
 
   componentWillMount() {
-    const { student, fetchStudent } = this.props
+    const { student, fetchOneStudent } = this.props
     const { studentId } = this.props.match.params
 
-
-    if (!student) { fetchStudent(studentId) }
+    if (!student) { fetchOneStudent(studentId) }
 
   }
 
+  deleteStudent= () => {
+    const { deleteStudent, student } = this.props
+    deleteStudent(student)
+  }
+
   editStudent = studentId => event => this.props.push(`/students/${studentId}/edit`)
-  evalStudent = studentId => event => this.props.push(`/students/${studentId}/eval`)
 
   render() {
     const { student } = this.props
@@ -38,20 +41,20 @@ class StudentEval extends PureComponent {
           >
         <div className="colors">
            {student.evaluations.map(e =>
-            <div className={e.color}></div>)}
+            <div key={e._id}className={e.color}></div>)}
         </div>
-          <img src={student.photo} alt="student" />
+          <img className="studentImage" src={student.photo} alt="student" />
             </CardMedia>
             <CardActions>
-              <FlatButton label="Evaluate" onClick={this.evalStudent(student._id)} />
               <FlatButton label="Edit" onClick={this.editStudent(student._id)} />
-              <FlatButton label="Delete" />
+              <FlatButton label="Delete" onClick={this.deleteStudent}/>
+              <FlatButton label="Back" onClick={() => this.props.push(`/batches/${student.batchId}`)}/>
             </CardActions>
         </Card>
         <div>
-          <StudentForm studentId={student._id} batchId={student.batchId}/>
+          <EvalForm studentId={student._id} batchId={student.batchId}/>
         </div>
-       </div>
+      </div>
     )
   }
 }
@@ -64,4 +67,4 @@ const mapStateToProps = ({ students }, { match }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchStudent, push })(StudentEval)
+  export default connect(mapStateToProps, { fetchOneStudent, deleteStudent, push })(EvalStudent)

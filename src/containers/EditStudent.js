@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchStudent } from '../actions/students'
+import { fetchOneStudent } from '../actions/students'
 import PropTypes from 'prop-types'
 import Title from '../components/UI/Title'
 import Paper from 'material-ui/Paper'
@@ -31,11 +31,10 @@ class EditStudent extends PureComponent {
   }
 
   componentWillMount() {
-    const { student, fetchStudent, updateStudent } = this.props
+    const { student, fetchOneStudent, updateStudent } = this.props
     const { studentId } = this.props.match.params
-    debugger
 
-    if (!student) { fetchStudent(studentId) }
+    if (!student) { fetchOneStudent(studentId) }
 
   }
 
@@ -54,7 +53,6 @@ class EditStudent extends PureComponent {
           photo: this.refs.photo.getValue(),
           evaluation: evaluation
       }
-        console.log("woohooo")
         this.props.updateStudent(updatedStudent, student._id)
         this.props.push(`/students/${student._id}`)
       }
@@ -79,7 +77,7 @@ class EditStudent extends PureComponent {
             </div>
             <div className="input">
               <h4>Photo: </h4>
-              <TextField ref="photo" type="text" placeholder='url' onClick={this.evalStudent(student._id)}defaultValue={student.photo} />
+              <TextField ref="photo" type="text" placeholder='url' defaultValue={student.photo} />
             </div>
             <div className="input">
               <div className="colors" >
@@ -120,4 +118,4 @@ const mapStateToProps = ({ students }, { match }) => {
   }
 }
 
-  export default connect(mapStateToProps, { fetchStudent, updateStudent, push })(EditStudent)
+  export default connect(mapStateToProps, { fetchOneStudent, updateStudent, push })(EditStudent)

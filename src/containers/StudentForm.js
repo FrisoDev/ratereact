@@ -41,6 +41,7 @@ class StudentForm extends PureComponent {
 
   render() {
     return (
+
       <Paper style={ dialogS }>
         <Title content="Add New Student" level={2} />
 
