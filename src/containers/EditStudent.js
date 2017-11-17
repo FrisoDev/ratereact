@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { fetchOneStudent } from '../actions/students'
-import PropTypes from 'prop-types'
 import Title from '../components/UI/Title'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
@@ -42,6 +41,7 @@ class EditStudent extends PureComponent {
 
     submitForm(event) {
       event.preventDefault()
+
         const { student } = this.props
         const evaluation = {
          color: this.state.value,
@@ -71,37 +71,64 @@ class EditStudent extends PureComponent {
           <Title content="Edit" level={2} />
 
           <form onSubmit={this.submitForm.bind(this)} ref="form">
+
             <div className="input">
+
               <h4>Full name: </h4>
               <TextField ref="name" type="text" defaultValue={student.name} />
+
             </div>
+
+
             <div className="input">
+
               <h4>Photo: </h4>
               <TextField ref="photo" type="text" placeholder='url' defaultValue={student.photo} />
+
             </div>
+
+
             <div className="input">
+
               <div className="colors" >
+
                 <div className="green1" primaryText="Green" onClick={this.handler("green")}></div>
                 <div className="yellow1" value={"yellow"} primaryText="Yellow" onClick={this.handler("yellow")}></div>
                 <div className="red1" value={"red"} primaryText="Red" onClick={this.handler("red")}></div>
+
               </div>
+
             </div>
+
+
             <div className="input">
+
               <h4>Date: </h4>
               <TextField ref="date" type="date" placeholder='Date' defaultValue={student.evaluations[student.evaluations.length-1].date}/>
+
            </div>
+
+
           <div className="input">
+
             <h4>Remarks: </h4>
             <TextField ref="note" type="text" placeholder='Remarks' defaultValue={student.evaluations[student.evaluations.length-1].note}  multiLine={true}
               rows={2}
               rowsMax={4} />
+
           </div>
+
+
           </form>
+
+
         <RaisedButton
           style={ buttonS }
           onClick={ this.submitForm.bind(this) }
           label="Change"
           primary={true} />
+
+
       </Paper>
       </Drawer>
     </div>

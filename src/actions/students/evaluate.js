@@ -4,20 +4,22 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-
 import API from '../../api/client'
+import { fetchOneBatch } from '../batches/fetch'
 
 export const EVAL_STUDENT = 'EVAL_STUDENT'
 
 const api = new API()
 
-export default (evalu,studentId) => {
+export default (rate,studentId,batchId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
-   api.patch(`/students/${studentId}`, evalu)
+
+   api.patch(`/students/${studentId}`, rate)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
+        dispatch(fetchOneBatch(batchId))
 
         dispatch({
           type: EVAL_STUDENT,
@@ -25,8 +27,6 @@ export default (evalu,studentId) => {
         })
       })
       .catch((error) => {
-        console.log("im alive")
-
         dispatch({ type: APP_DONE_LOADING })
         dispatch({
           type: LOAD_ERROR,

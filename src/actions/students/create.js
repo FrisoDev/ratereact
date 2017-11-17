@@ -5,7 +5,7 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-
+import { fetchOneBatch } from '../batches/fetch'
 export const CREATE_STUDENT = 'CREATE_STUDENT'
 
 const api = new API()
@@ -14,15 +14,12 @@ export default (student, batchId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-  api.post(`/students`, student)
+  api.post('/students', student)
     .then((result) => {
       dispatch({ type: APP_DONE_LOADING })
       dispatch({ type: LOAD_SUCCESS })
+      dispatch(fetchOneBatch(batchId))
 
-      dispatch({
-        type: CREATE_STUDENT,
-        payload: result.body
-      })
     })
 
     .catch((error) => {
