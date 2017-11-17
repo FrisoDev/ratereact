@@ -28,7 +28,7 @@ class EditStudent extends PureComponent {
     this.state = {open: true,
       value: ""};
   }
-
+    state = {}
   componentWillMount() {
     const { student, fetchOneStudent, updateStudent } = this.props
     const { studentId } = this.props.match.params
@@ -36,9 +36,6 @@ class EditStudent extends PureComponent {
     if (!student) { fetchOneStudent(studentId) }
 
   }
-
-    state = {}
-
     submitForm(event) {
       event.preventDefault()
 

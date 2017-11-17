@@ -80,7 +80,7 @@ class EvalForm extends PureComponent {
          </div>
         <div className="input">
           <h4>Remarks: </h4>
-          <TextField ref="note" type="text" placeholder='Remarks'
+          <TextField ref="note" type="text" placeholder='Comment'
             multiLine={true}
             rows={2}
             rowsMax={4} />

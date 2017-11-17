@@ -13,7 +13,7 @@ const dS = {
   padding: '3rem',
 }
 
-const buttonStyle = {
+const buttonS = {
   float: 'right',
   marginLeft: '5rem',
 }
@@ -43,7 +43,7 @@ class BatchForm extends PureComponent {
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">
           <div className="input">
-            <TextField ref="batchNumber" type="number" placeholder="Batch Number #" />
+            <TextField ref="batchNumber" type="number" placeholder="Batch Number" />
           </div>
           <div className="input">
             <h4>Start Date: </h4>
@@ -55,7 +55,7 @@ class BatchForm extends PureComponent {
           </div>
         </form>
         <RaisedButton
-          style={ buttonStyle }
+          style={ buttonS }
           onClick={ this.submitForm.bind(this) }
           label="Add"
           primary={true} />

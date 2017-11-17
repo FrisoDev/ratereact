@@ -6,6 +6,8 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import SignIn from './SignIn'
 import PropTypes from 'prop-types'
 import BatchForm from './BatchForm'
+import Menu from 'material-ui/Menu'
+import MenuItem from 'material-ui/MenuItem'
 
 const styles = {
   root: {
@@ -14,8 +16,8 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    width: 800,
-    height: 450,
+    width: 823,
+    height: 500,
   },
   titleStyle: {
   color: 'black',
@@ -41,24 +43,22 @@ class Batches extends PureComponent {
 
     return(
       <div style={styles.root}>
-        <GridList
+        <Menu
          cellHeight={150}
          style={styles.gridList}
         >
      {this.props.batches.map((batch) => (
-       <GridTile
-         className= "gridTile"
+       <MenuItem
+         className= "menuBatch"
          key={batch._id}
-         title= {"Batch " + batch.batchNumber}
+         primaryText= {"Batch " + batch.batchNumber}
          titleStyle={styles.titleStyle}
-         subtitle={<span>{batch.startDate.substr(0,10) + " / " + batch.endDate.substr(0,10)}</span>}
+         secondaryText={<span>{batch.startDate.substr(0,10) + " / " + batch.endDate.substr(0,10)}</span>}
          subtitleStyle={styles.subtitleStyle}
          onClick={this.goToBatch(batch._id)}
-         titleBackground="rgba(198, 41, 41,0.7)"
-        >
-       </GridTile>
+        />
      ))}
-   </GridList>
+   </Menu>
    <BatchForm />
  </div>
     )
