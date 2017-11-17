@@ -41,15 +41,17 @@ class EditStudent extends PureComponent {
       event.preventDefault()
 
         const { student } = this.props
+        const evaluations = this.props.student.evaluations
         const evaluation = {
          color: this.state.value,
          date: this.refs.date.getValue(),
          note: this.refs.note.getValue()
        }
+       evaluations.push(evaluation)
         const updatedStudent = {
           name: this.refs.name.getValue(),
           photo: this.refs.photo.getValue(),
-          evaluations: evaluation
+          evaluations: evaluations
       }
         this.props.updateStudent(updatedStudent, student._id)
         this.props.push(`/students/${student._id}`)
