@@ -57,7 +57,7 @@ class EvalForm extends PureComponent {
         s=>s._id === studentId)+1)%this.props.students.length]._id}`)
       }
 
-  handleChange = (value) => { this.setState({value}) }
+  handler = (value) => { this.setState({value}) }
 
   render() {
     return (
@@ -67,9 +67,9 @@ class EvalForm extends PureComponent {
         <form onSubmit={this.submitForm.bind(this)} ref="form">
         <div className="input">
           <div className="colors" >
-            <div className="green1" onClick={()=>this.handleChange("green")}></div>
-            <div className="yellow1" onClick={()=>this.handleChange("yellow")}></div>
-            <div className="red1" onClick={()=>this.handleChange("red")}></div>
+            <div className="green1" onClick={()=>this.handler("green")}></div>
+            <div className="yellow1" onClick={()=>this.handler("yellow")}></div>
+            <div className="red1" onClick={()=>this.handler("red")}></div>
           </div>
         </div>
          <h4>Rate: {this.state.value}</h4>
