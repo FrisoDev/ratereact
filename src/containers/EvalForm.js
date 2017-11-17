@@ -62,7 +62,7 @@ class EvalForm extends PureComponent {
   render() {
     return (
       <Paper style={ dialogStyle }>
-        <Title content="Rate Student" level={2} />
+        <Title content="Evaluate Student" level={2} />
 
         <form onSubmit={this.submitForm.bind(this)} ref="form">
         <div className="input">

@@ -49,7 +49,7 @@ class EditStudent extends PureComponent {
         const updatedStudent = {
           name: this.refs.name.getValue(),
           photo: this.refs.photo.getValue(),
-          evaluation: evaluation
+          evaluations: evaluation
       }
         this.props.updateStudent(updatedStudent, student._id)
         this.props.push(`/students/${student._id}`)

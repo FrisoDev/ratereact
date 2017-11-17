@@ -1,4 +1,3 @@
-// src/components/ui/Navigation.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,7 +8,7 @@ import IconButton from 'material-ui/IconButton'
 import FlatButton from 'material-ui/FlatButton'
 
 
-const TITLE = 'Student Evaluation'
+const TITLE = 'Student Evaluations'
 
 class Navigation extends PureComponent {
   static propTypes = {

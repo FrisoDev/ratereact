@@ -11,6 +11,7 @@ export const UPDATE_STUDENT = 'UPDATE_STUDENT'
 const api = new API()
 
 export default (student, studentId) => {
+  console.log(student)
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
