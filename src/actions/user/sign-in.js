@@ -28,8 +28,6 @@ export default ({ email, password}) => {
         // Redirect programatically to the Lobby
         dispatch(replace('/'))
 
-    
-
         return api.get('/users/me')
       })
       .then((res) => {

@@ -77,7 +77,7 @@ class Batch extends PureComponent {
               actionIcon={<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="1 0 24 23">
                <circle fill={student.evaluations[student.evaluations.length-1].color} cx="12" cy="12" r="50"/></svg>}
             >
-              <img className="studentPhoto" src={student.photo} alt="photo"  onClick={this.goStudent(student._id)}/>
+              <img className="studentPhoto" src={student.photo} alt="studento"  onClick={this.goStudent(student._id)}/>
         </GridTile>
     ))}
   </GridList>

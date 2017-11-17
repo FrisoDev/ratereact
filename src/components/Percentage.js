@@ -8,7 +8,7 @@ class Percentage extends PureComponent {
     return (
       <AppBar
       title={"Batch # " + batch.batchNumber}
-      style={{backgroundColor: 'grey50'}}
+      style={{backgroundColor: 'cadetblue'}}
       iconElementRight={
       <div className="colors" >
         <div className="green1" ></div>

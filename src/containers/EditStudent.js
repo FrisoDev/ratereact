@@ -30,6 +30,7 @@ class EditStudent extends PureComponent {
   }
     state = {}
   componentWillMount() {
+    // eslint-disable-next-line
     const { student, fetchOneStudent, updateStudent } = this.props
     const { studentId } = this.props.match.params
 

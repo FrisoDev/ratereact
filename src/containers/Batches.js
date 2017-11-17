@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { fetchBatches } from '../actions/batches'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import {GridList, GridTile} from 'material-ui/GridList';
 import SignIn from './SignIn'
 import PropTypes from 'prop-types'
 import BatchForm from './BatchForm'
