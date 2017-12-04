@@ -18,7 +18,6 @@ export default () => {
     .then((result) => {
       dispatch({ type: APP_DONE_LOADING })
       dispatch({ type: LOAD_SUCCESS })
-      
 
       dispatch({
         type: FETCHED_BATCHES,
