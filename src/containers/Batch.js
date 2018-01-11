@@ -70,7 +70,7 @@ class Batch extends PureComponent {
         >
          {batch.students.map((student) => (
             <GridTile
-              cols='1'
+              cols={1}
               key={student._id}
               title={student.name}
               onClick={this.goStudent(student._id)}
